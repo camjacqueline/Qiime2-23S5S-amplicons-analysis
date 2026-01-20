@@ -1,5 +1,119 @@
-# Qiime2-23S5S-amplicons-analysis
-Script for the use of Qiime2 to analyse 23S-5S amplicons data 
-- Illumina 2x150 sequencing
-- Adaptations for Nanopore sequecing
-- Adaptations for MiSeq 2x300 sequencing 
+# QIIME 2 pipeline for 23S–5S amplicon sequencing data
+
+This repository contains a QIIME 2–based analysis pipeline for **23S–5S rDNA amplicon sequencing data**, with a primary implementation for **Illumina paired-end 2×150 bp sequencing** and documented adaptations for **Nanopore** and **Illumina MiSeq 2×300 bp** data.
+
+The pipeline covers raw data import, denoising, feature table generation, taxonomic assignment using a **custom 23S–5S reference database**, and downstream visualization.
+
+---
+
+## Overview of the workflow
+
+The pipeline performs the following steps:
+
+1. Execution of QIIME 2 within a **Singularity container**
+2. Import of paired-end FASTQ files using a manifest file
+3. Quality assessment of demultiplexed reads
+4. Denoising and ASV inference using **DADA2**
+5. Generation of feature tables and representative sequences
+6. Training of a **Naive Bayes classifier** on a homemade 23S–5S reference database
+7. Taxonomic assignment of ASVs
+8. Visualization of taxonomic composition (bar plots)
+
+---
+
+## Sequencing technologies supported
+
+### Implemented and validated
+- **Illumina paired-end 2×150 bp** (default configuration)
+
+### Adaptations documented
+- **Illumina MiSeq 2×300 bp**
+- **Oxford Nanopore Technologies (ONT)**
+- **Taxonomic assignment of ASVs using BLAST instead of NB classifier**
+
+---
+
+## Software requirements
+
+- **Singularity**
+- **QIIME 2** (tested within a Singularity container)
+- Standard UNIX tools (`bash`, `awk`, `ls`)
+
+> All QIIME 2 commands are executed from within a Singularity image (`qiime2.sif`).
+
+---
+
+## Input data requirements
+
+### Illumina paired-end data
+- Gzipped FASTQ files
+- Naming convention:
+<sampleID>_R1.fastq.gz
+<sampleID>_R2.fastq.gz
+- Phred+33 quality encoding
+
+### Reference database
+- FASTA file containing 23S–5S reference sequences (Merge_23S-5S_20251219.fasta)
+- Taxonomy file in **headerless TSV format** (23s5sdb_V1.3.0.tax)
+
+---
+
+## Manifest file generation
+
+The pipeline generates a **legacy comma-separated manifest** automatically from FASTQ filenames.
+
+> ⚠️ Note  
+> Recent QIIME 2 versions recommend **tab-separated manifests**.  
+> This pipeline intentionally uses the legacy format for backward compatibility.
+
+---
+
+## Denoising strategy (Illumina 2×150)
+
+DADA2 paired-end denoising is performed with:
+
+- Fixed truncation length for forward and reverse reads
+- Large error model training set
+- Multi-threaded execution
+
+Key parameters:
+- `--p-trunc-len-f 148`
+- `--p-trunc-len-r 148`
+- `--p-n-reads-learn 500000`
+- `--p-n-threads 50`
+
+These values should be adjusted based on quality profiles and sequencing depth.
+
+---
+
+## Custom 23S–5S reference database
+
+The pipeline supports a **homemade reference database**, which is:
+
+1. Imported as `FeatureData[Sequence]`
+2. Imported taxonomy as `FeatureData[Taxonomy]`
+3. Used to train a **Naive Bayes classifier**
+
+This allows:
+- Full control over taxonomic resolution
+- Adaptation to non-standard or curated 23S–5S datasets
+
+---
+
+## Taxonomic assignment
+
+Taxonomy is assigned using:
+
+- `feature-classifier classify-sklearn`
+- Confidence threshold: **0.99**
+
+Taxonomic composition is visualized using:
+- `qiime taxa barplot`
+- Optional feature table filtering prior to visualization
+
+---
+
+## Adaptations for other sequencing technologies
+
+See script provided. 
+
