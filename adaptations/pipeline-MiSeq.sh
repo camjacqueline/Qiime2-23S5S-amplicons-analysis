@@ -135,4 +135,6 @@ qiime feature-table tabulate-seqs \
   --i-data rep-seqs-23s5s.qza \
   --o-visualization rep-seqs-23s5s.qzv
 
-###Following steps are similar to main pipeline
+###Following steps for taxon assignement. 
+############IMPORTANT : If you want to use vsearch, truncate your sequences to 170pb. 
+############Otherwise Naive Bayesian classifier shows a better performance.
