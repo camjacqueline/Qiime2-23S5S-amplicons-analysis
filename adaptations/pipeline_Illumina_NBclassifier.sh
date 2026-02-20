@@ -125,21 +125,21 @@ qiime feature-table tabulate-seqs \
 # Import reference sequences
 qiime tools import \
   --type FeatureData[Sequence] \
-  --input-path Merge_23S-5S_20251219.fasta \
-  --output-path 23s5sdb_v1.3.0.qza
+  --input-path Merge_23S-5S_20260218_cured.fasta \
+  --output-path 23s5sdb_v1.4.0.qza
 
 # Import taxonomy (headerless TSV)
 qiime tools import \
   --type FeatureData[Taxonomy] \
   --input-format HeaderlessTSVTaxonomyFormat \
-  --input-path 23s5sdb_V1.3.0.tax \
-  --output-path 23s5sdb_V1.3.0_tax.qza
+  --input-path 23s5sdb_V1.4.0.tax \
+  --output-path 23s5sdb_V1.4.0_tax.qza
 
 # Train Naive Bayes classifier
 qiime feature-classifier fit-classifier-naive-bayes \
-  --i-reference-reads 23s5sdb_v1.3.0.qza \
-  --i-reference-taxonomy 23s5sdb_V1.3.0_tax.qza \
-  --o-classifier 23s5sdb_V1.3.0_classifier.qza
+  --i-reference-reads 23s5sdb_v1.4.0.qza \
+  --i-reference-taxonomy 23s5sdb_V1.4.0_tax.qza \
+  --o-classifier 23s5sdb_V1.4.0_classifier.qza
 
 ###############################################################################
 # Taxonomic assignment
@@ -149,7 +149,7 @@ qiime feature-classifier fit-classifier-naive-bayes \
 qiime feature-classifier classify-sklearn \
   --p-n-jobs 48 \
   --p-confidence 0.99 \
-  --i-classifier 23s5sdb_V1.3.0_classifier.qza \
+  --i-classifier 23s5sdb_V1.4.0_classifier.qza \
   --i-reads rep-seqs-23s5s.qza \
   --o-classification taxonomy-23s5s.qza
 
