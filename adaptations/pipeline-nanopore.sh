@@ -114,7 +114,7 @@ qiime feature-table tabulate-seqs \
 qiime feature-classifier classify-sklearn \
   --p-n-jobs 48 \
   --p-confidence 0.99 \
-  --i-classifier 23s5sdb_V1.3.0_classifier.qza \
+  --i-classifier 23s5sdb_V1.4.0_classifier.qza \
   --i-reads rep-seqs.qza \
   --o-classification taxonomy-23s5s.qza
 
