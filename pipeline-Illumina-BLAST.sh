@@ -136,8 +136,8 @@ qiime feature-table tabulate-seqs \
 
 qiime feature-classifier classify-consensus-vsearch \
   --i-query rep-seqs-23s5s.qza \
-  --i-reference-reads 23s5sdb_v1.3.0.qza \
-  --i-reference-taxonomy 23s5sdb_V1.3.0_tax.qza \
+  --i-reference-reads 23s5sdb_v1.4.0.qza \
+  --i-reference-taxonomy 23s5sdb_V1.4.0_tax.qza \
   --p-perc-identity 0.95 \
   --p-threads 48 \
   --output-dir vsearch95 \
