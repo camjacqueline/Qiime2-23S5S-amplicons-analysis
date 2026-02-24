@@ -66,7 +66,7 @@ L-santicrucis	"Bacteria;Pseudomonadota;Gammaproteobacteria;Legionellales;Legione
 L-saoudiensis	"Bacteria;Pseudomonadota;Gammaproteobacteria;Legionellales;Legionellaceae;Legionella;Legionella_saoudiensis"
 L-septentrionalis	"Bacteria;Pseudomonadota;Gammaproteobacteria;Legionellales;Legionellaceae;Legionella;Legionella_septentrionalis"
 L-shakespearei	"Bacteria;Pseudomonadota;Gammaproteobacteria;Legionellales;Legionellaceae;Legionella;Legionella_shakespearei"
-L-sheltonii	"Bacteria;Pseudomonadota;Gammaproteobacteria;Legionellales;Legionellaceae;Legionella;Legionella_sheltonii"
+L-sheltonii_OR_L-cherrii	"Bacteria;Pseudomonadota;Gammaproteobacteria;Legionellales;Legionellaceae;Legionella;Legionella_sheltonii_OR_cherrii"
 L-spiritensis	"Bacteria;Pseudomonadota;Gammaproteobacteria;Legionellales;Legionellaceae;Legionella;Legionella_spiritensis"
 L-steelei	"Bacteria;Pseudomonadota;Gammaproteobacteria;Legionellales;Legionellaceae;Legionella;Legionella_steelei"
 L-steigerwaltii	"Bacteria;Pseudomonadota;Gammaproteobacteria;Legionellales;Legionellaceae;Legionella;Legionella_steigerwaltii"
