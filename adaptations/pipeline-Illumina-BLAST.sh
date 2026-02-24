@@ -7,8 +7,7 @@
 # 2. Imports paired-end FASTQ files using a manifest
 # 3. Performs denoising with DADA2
 # 4. Generates summary visualizations
-# 5. Trains a custom Naive Bayes classifier on a homemade 23S–5S reference
-# 6. Assigns taxonomy and produces taxonomic bar plots
+# 5. Assigns taxonomy and produces taxonomic bar plots
 #
 # Author: Camille JACQUELINE
 # Environment: Singularity + QIIME 2
